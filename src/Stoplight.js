@@ -1,12 +1,14 @@
 import React from 'react';
+import { observer } from 'mobx-react'
 
-const Stoplight = props => {
+const Stoplight = observer(({store, ...props}) => {
+  const currentState = store.currentState
   const green =
-    props.color === 'green' ? 'rgb(79,186,128)' : 'rgb(79,186,128, 0.35)';
+    currentState === 'green' ? 'rgb(79,186,128)' : 'rgb(79,186,128, 0.35)';
   const yellow =
-    props.color === 'yellow' ? 'rgb(255,221,21)' : 'rgb(255,221,21,0.35)';
+    currentState === 'yellow' ? 'rgb(255,221,21)' : 'rgb(255,221,21,0.35)';
   const red =
-    props.color === 'red' ? 'rgb(236,28,36)' : 'rgba(236,28,36, 0.35)';
+    currentState === 'red' ? 'rgb(236,28,36)' : 'rgba(236,28,36, 0.35)';
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496.162 496.162" style={{ width: '300px' }}>
@@ -35,6 +37,8 @@ const Stoplight = props => {
       <circle cx="248.081" cy="317.081" r="43" fill={green} />
     </svg>
   );
-};
+});
+
+Stoplight.displayName = 'Stoplight'
 
 export default Stoplight;
